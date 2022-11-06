@@ -41,13 +41,13 @@
     <div class="container" id="personal">
     <div class="row justify-content-center pt-5">
         <div class="col-lg-7 col-md-10">
-            <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants"> 
+            <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants" id="form"> 
                 <table>
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="input_overlay">
                             <tr>
-                            <td><label for="fname" class="lable">Enter your first name</label></td>
+                            <td><label for="fname" class="lable" id="user">Enter your first name</label></td>
                             <td><input type="text" name="ชื่อจริง" class="form-control" required autocomplete="off" placeholder="ชื่อจริง"></td>
                         </tr>
                         </div>
@@ -118,12 +118,43 @@
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzJP4sCPdpt3fHaifxcS7kUjGfMPAVU_cPK2iIEgaGBoYL_NtTTNdRfHTpXJ5j2Dh1b/exec'
         const form = document.forms['restaurants']
-        form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>Thank You for providing the details, We shall get back to you shortly !</b></div>",restaurants.reset())
-            .catch(error => console.error('Error!', error.message))
-        })
+        let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+        console.log(cookies)
+        if (cookies.name == '' || cookies.name == null) {
+            form.addEventListener('submit', e => {
+                document.cookie = "name=" + document.getElementById('user').value
+                console.log(document.cookie)
+                e.preventDefault()
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>Thank You for providing the details, We shall get back to you shortly !</b></div>", restaurants.reset())
+                    .catch(error => console.error('Error!', error.message))
+                location.reload()
+            })
+        } else {
+            const forums = document.getElementById('form') 
+            const br = document.createElement('br')
+            const hr = document.createElement('hr')
+            const p = document.createElement('p')
+            const text = document.createElement('h1')
+            const background = document.getElementById('personal')
+            const clear_btn = document.createElement('button')
+            forums.style.opacity = '0'
+            text.innerHTML = 'Finish!!!';p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว';p.style.fontSize = '20px'
+            text.style.position = 'absolute';text.style.font = 'bold';text.style.fontSize = '72px'
+            text.style.top = '50%';text.style.left = '50%';hr.style.marginTop = '10px'
+            text.style.transform = 'translate(-50%,-50%)'
+            clear_btn.innerText = 'Clear';clear_btn.setAttribute('onclick','clearCookie()')
+            text.appendChild(br)
+            text.appendChild(p)
+            background.appendChild(text)
+            text.appendChild(hr)
+            text.appendChild(clear_btn)
+        }
+        
+        function clearCookie() {
+            document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure";
+            location.reload()
+        }
         var break_key = 0;
         var break_key1 = 0;
         const home = document.getElementById('button-1');

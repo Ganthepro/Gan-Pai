@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="letter-g.png">
     <meta charset="UTF-8">
@@ -37,63 +38,69 @@
             <a id="new_a_github" href="https://github.com/Ganthepro"><img src="github-pngrepo-com (1).png"></a>
         </div>
     </header>
-    <h1 style="text-align: center;" id="detail">ลงทะเบียนครั้งแรก (ลิฟต์ 021)</h1>
+    <h1 style="text-align: center;" id="detail">ลงทะเบียนครั้งแรก (ลิฟต์ 022)</h1>
     <div class="container" id="personal">
-    <div class="row justify-content-center pt-5">
-        <div class="col-lg-7 col-md-10">
-            <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants" id="form"> 
-                <table>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="input_overlay">
-                            <tr>
-                            <td><label for="fname" class="lable">Enter your first name</label></td>
-                            <td><input type="text" name="ชื่อจริง" class="form-control" required autocomplete="off" placeholder="ชื่อจริง" id="user"></td>
-                        </tr>
+        <div class="row justify-content-center pt-5">
+            <div class="col-lg-7 col-md-10">
+                <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants" id="form">
+                    <table>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="input_overlay">
+                                    <tr>
+                                        <td><label for="fname" class="lable">Enter your first name</label></td>
+                                        <td><input type="text" name="ชื่อจริง" class="form-control" required
+                                                autocomplete="off" placeholder="ชื่อจริง" id="user"></td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input_overlay">
+                                    <tr>
+                                        <td><label for="lname" class="lable">Enter your last name</label></td>
+                                        <td><input type="text" name="last_name" class="form-control" required
+                                                autocomplete="off" placeholder="นามสกุล"></td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input_overlay">
+                                    <tr>
+                                        <td><label for="email" class="lable">Enter email address</label></td>
+                                        <td><input type="text" name="email" class="form-control" required
+                                                autocomplete="off" placeholder="อีเมล์"></td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="input_overlay">
+                                    <tr>
+                                        <td><label for="phone" class="lable">Phone number</label></td>
+                                        <td><input type="text" name="phone" class="form-control" required
+                                                autocomplete="off" placeholder="เบอร์โทรศัพท์"></td>
+                                    </tr>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input_overlay textarea">
+                                    <tr>
+                                        <td><label for="desc" class="lable">Description</label></td>
+                                        <td><textarea name="description" cols="30" rows="4" class="form-control"
+                                                required autocomplete="off"
+                                                placeholder="รายละเอียดเพิ่มเติม"></textarea></td>
+                                    </tr>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="input_overlay">
-                            <tr>
-                                <td><label for="lname" class="lable">Enter your last name</label></td>
-                            <td><input type="text" name="last_name" class="form-control" required autocomplete="off" placeholder="นามสกุล"></td>
-                        </tr>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="input_overlay">
-                            <tr>
-                                <td><label for="email" class="lable">Enter email address</label></td>
-                            <td><input type="text" name="email" class="form-control" required autocomplete="off" placeholder="อีเมล์"></td>
-                        </tr>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="input_overlay">
-                            <tr>
-                                <td><label for="phone" class="lable">Phone number</label></td>
-                                <td><input type="text" name="phone" class="form-control" required autocomplete="off" placeholder="เบอร์โทรศัพท์"></td>
-                        </tr>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="input_overlay textarea">
-                            <tr>
-                                <td><label for="desc" class="lable">Description</label></td>
-                                <td><textarea name="description" cols="30" rows="4" class="form-control" required autocomplete="off" placeholder="รายละเอียดเพิ่มเติม"></textarea></td>
-                        </tr>
-                        </div>
-                    </div>
-                     
-                    <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                    </div>
-                </div>
-                </table>
-                <p id="demo"></p>
-            </form>
+                    </table>
+                    <p id="demo"></p>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     <footer class="footer">
         <h1 id="h1-footer">Thanks!</h1>
@@ -116,11 +123,11 @@
         </div>
     </footer>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzwt3aNFIRkez2lWJrZpzq5nZIOdkNx0IdkPaMBd6A1VBNTJe8DcUtvvEEAJ5e3gVRG/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxDXmJPvgLPojedk_6iFct3g7oYRcMQ2x6F282JhjdtCnCxncOeMd_VRztKiwKJg_B4/exec'
         const form = document.forms['restaurants']
         const ele = document.getElementById('detail')
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-        console.log(cookies)
+        console.log(cookies);
         let text = ele.innerText;
         if ((cookies.name == '' || cookies.name == null) || (cookies.text != text)) {
             form.addEventListener('submit', e => {
@@ -141,12 +148,11 @@
             const text = document.createElement('h1')
             const background = document.getElementById('personal')
             const clear_btn = document.createElement('button')
-            const detail = document.getElementById('detail')
             forums.style.opacity = '0'
             text.innerHTML = 'Finish!!!';p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว';p.style.fontSize = '20px'
             text.style.position = 'absolute';text.style.font = 'bold';text.style.fontSize = '72px'
             text.style.top = '50%';text.style.left = '50%';hr.style.marginTop = '10px'
-            text.style.transform = 'translate(-50%,-50%)';detail.innerText = 'Log In'
+            text.style.transform = 'translate(-50%,-50%)'
             clear_btn.innerText = 'Clear';clear_btn.setAttribute('onclick','clearCookie()')
             text.appendChild(br)
             text.appendChild(p)
@@ -160,13 +166,6 @@
             location.reload()
         }
         
-        console.log(document.cookie.split(";"))
-        form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>Thank You for providing the details, We shall get back to you shortly !</b></div>",restaurants.reset())
-            .catch(error => console.error('Error!', error.message))
-        })
         var break_key = 0;
         var break_key1 = 0;
         const home = document.getElementById('button-1');
@@ -249,4 +248,5 @@
         })
     </script>
 </body>
+
 </html>
