@@ -7,24 +7,28 @@
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         const text = 'ฟิตเนส 011'
-        let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-        if (cookies.loc != text) { // ถ้า loc เดิม != loc ใหม่
-            document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "loc=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "status=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "loc=" + text
-            document.cookie = "status=" + 'new'
-            let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-            console.log(cookies.loc)
-            console.log(cookies.status)
+        // localStorage.clear()
+        if (JSON.parse(localStorage.getItem('all')) == null) {
+            localStorage.setItem('all', '[]')
         } else {
-            document.cookie = "status=" + 'old'
-            console.log(cookies.status)
+            let all_loc = JSON.parse(localStorage.getItem('all'))
         }
-        window.location.href = '/main.html';
+        let all_loc = JSON.parse(localStorage.getItem('all'))
+        // console.log(localStorage.getItem('all'))
+        for (var i = 0; i < all_loc.length; i++) {
+            if (all_loc[i] == 'ฟิตเนส 011') {
+                all_loc.splice(i, 1);
+            }
+        }
+        all_loc.push(text)
+        localStorage.setItem('all', JSON.stringify(all_loc))
+        console.log(localStorage.getItem('all'))
+        
+        // window.location.href = '/main.html';
     </script>
 </body>
 

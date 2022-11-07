@@ -94,30 +94,32 @@
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+        console.log(cookies);
         const form = document.forms['restaurants']
         document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + cookies.loc + ')'
+        const num = cookies.num
+        let main_arr = [];
         if ((cookies.name == '' || cookies.name == null) || (cookies.status == 'new')) {
+            console.log(cookies);
             form.addEventListener('submit', e => {
-                console.log(all_loc)
-                if (all_loc != undefined) {
-                    for (let i = 0;i < all_loc.split(',').length;i++) {
-                        locArr.push(all_loc)
-                        console.log(all_loc)
-                    }
-                }
-                locArr.push(text_loc)
-                console.log(locArr)
-                document.cookie = "All_loc=" + locArr.toString()
-                cookies.status = 'old'
                 const d = new Date()
                 document.getElementById('loc').defaultValue = cookies.loc
                 document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
                 document.cookie = "name=" + document.getElementById('user').value
-                // console.log(document.cookie)
+                if (cookies.info != undefined) {
+                    main_arr.push(cookies.info)
+                    console.log(main_arr)        
+                }
+                main_arr.push(cookies.loc)
+                console.log(main_arr)
+                document.cookie = "info=" + main_arr.toString()
+                // let cookies_info = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+                // arr.push(cookies_info.info.split(','))
                 e.preventDefault()
                 fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                     .then(response => restaurants.reset())
                     .catch(error => console.error('Error!', error.message))
+                cookies.status = 'old'
                 // window.location.href = '/' + cookies.loc + '.html';
             })
         } else if (cookies.status == 'old') {

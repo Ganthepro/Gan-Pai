@@ -1,2 +1,8 @@
-const d = new Date();
-console.log(d.getDay());
+const person = {
+    name: "Obaseki Nosa",
+    location: "Lagos",
+}
+
+window.localStorage.setItem('user', JSON.stringify(person))
+console.log(JSON.parse(window.localStorage.getItem('user'))
+)
