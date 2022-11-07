@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const text = 'ลิฟต์ 022'
+        let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+        if (cookies.loc != text) { // ถ้า loc เดิม != loc ใหม่
+            document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
+            document.cookie = "loc=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
+            document.cookie = "status=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
+            document.cookie = "loc=" + text
+            document.cookie = "status=" + 'new'
+            let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+            console.log(cookies.loc)
+            console.log(cookies.status)
+        } else {
+            document.cookie = "status=" + 'old'
+            console.log(cookies.status)
+        }
+        window.location.href = '/main.html';
+    </script>
+</body>
+
+</html>

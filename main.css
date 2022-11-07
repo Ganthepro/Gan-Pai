@@ -231,7 +231,7 @@
         height: 600px;   
     }
     #personal {
-        height: 900px;   
+        height: 500px;   
     }
     #activity {
         height: 1500px;   
@@ -258,6 +258,34 @@
     }
     td img {
         height: auto;
+    }
+    form {
+        /* border: 2px solid blue; */
+        position: absolute;
+        width: 100%;height: 100%;
+    }
+    
+    .lable_h1 {
+        margin-bottom: 10px;
+        font-size: 30px;
+    }
+    
+    .form-control {
+        margin-top: 30px;
+        width: 300px;
+        height: 80px;
+        border-radius: 10px;
+        border: none;
+    }
+    
+    input[type="text"] {
+        font-size:60px;
+        font-family: 'Kanit', sans-serif;
+        text-align: center;
+    }
+    .col-lg-6 {
+    /* border: 2px solid red; */
+    position: absolute;left: 50%;top: 40%;transform: translate(-50%,-50%);
     }
 }
 @media only screen and (min-width: 768px) {
@@ -658,6 +686,34 @@
     td img {
         height: 100%;
     }
+    .col-lg-6 {
+    /* border: 2px solid red; */
+    position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);
+    }
+    form {
+        /* border: 2px solid blue; */
+        position: absolute;
+        width: 100%;height: 100%;
+    }
+    
+    .lable_h1 {
+        margin-bottom: 10px;
+        font-size: 50px;
+    }
+    
+    .form-control {
+        margin-top: 30px;
+        width: 800px;
+        height: 80px;
+        border-radius: 10px;
+        border: none;
+    }
+    
+    input[type="text"] {
+        font-size:60px;
+        font-family: 'Kanit', sans-serif;
+        text-align: center;
+    }
 }
 table {
     /* padding: 40px; */
@@ -692,10 +748,21 @@ td img {
 
 .btn-primary {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     z-index: 1;transform: translate(-50%,0);
     left: 50%;
+    width: 100px;height: 60px;
+    font-family: 'Kanit', sans-serif;
+    border-radius: 10px;border: 3pt solid #AC3520;
+    background-color: rgb(255, 209, 63);
+    font-family: 'Prompt', sans-serif;font-size: 20px;
+    transition: font-size 1s;
 }    
+
+.btn-primary:hover {
+    font-size: 25px;
+    cursor:pointer;
+}
 
 #demo {
     position: absolute;
@@ -704,7 +771,5 @@ td img {
 }
 
 ::placeholder {
-    font-family: 'Square Peg', cursive;
+    font-family: 'Kanit', sans-serif;
 }
-
-
