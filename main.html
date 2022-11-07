@@ -30,34 +30,40 @@
             </div>
         </div>
         <div id="a-link">
-            <button id="button-1" onclick="window.location.href = '/tamtikorn_portfolio2'">Home</button>
+            <button id="button-1" onclick="window.location.href = 'https://ganthedev.ddns.net/'">Home</button>
             <button id="button-2" onclick="window.location.href = 'https://github.com/Ganthepro'">GitHub</button>
         </div>
         <div id="a-link2">
-            <a id="new_a_home" href="/tamtikorn_portfolio2"><img src="home-pngrepo-com.png"></a>
+            <a id="new_a_home" href="https://ganthedev.ddns.net/"><img src="home-pngrepo-com.png"></a>
             <a id="new_a_github" href="https://github.com/Ganthepro"><img src="github-pngrepo-com (1).png"></a>
         </div>
     </header>
-    <h1 style="text-align: center;" id="detail">ลงทะเบียนครั้งแรก (ลิฟต์ 021)</h1>
+    <h1 style="text-align: center;" id="detail">ลงทะเบียนครั้งแรก</h1>
     <div class="container" id="personal">
         <div class="row justify-content-center pt-5">
             <div class="col-lg-7 col-md-10">
-                <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants" id="form">
+                <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants"
+                    id="form">
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="input_overlay">
-                                <label for="fname" class="lable"><h1 class="lable_h1">Enter your ID</h1></label>
+                                <label for="fname" class="lable">
+                                    <h1 class="lable_h1">Enter your ID</h1>
+                                </label>
                                 <hr>
-                                <input type="text" name="ID" class="form-control" required autocomplete="off" placeholder="ID" id="user">
+                                <input type="text" name="ID" class="form-control" required autocomplete="off"
+                                    placeholder="ID" id="user">
                             </div>
                         </div>
-                    <div style="opacity: 0;">
-                        <input type="text" id="loc" name="Location">
-                        <input type="text" id="dt" name="Date/Time">
-                    </div>
-                    <div class="col-12 text-end">
-                        <button type="submit" class="btn btn-primary mt-3"><p>Submit</p></button>
-                    </div>
+                        <div style="opacity: 0;">
+                            <input type="text" id="loc" name="Location">
+                            <input type="text" id="dt" name="Date/Time">
+                        </div>
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-primary mt-3">
+                                <p>Submit</p>
+                            </button>
+                        </div>
                 </form>
             </div>
             <p id="demo"></p>
@@ -86,26 +92,28 @@
         </div>
     </footer>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyhhQVni9PRm1FFIFCPYsNlNgiJEKRVL5aDqE7XyZpYUjYwuzEmt3oE7LPPYBEUwvIi/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
         console.log(cookies);
         const form = document.forms['restaurants']
+        document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + cookies.loc + ')'
         console.log(form)
         if ((cookies.name == '' || cookies.name == null) || (cookies.status == 'new')) {
             console.log(cookies);
             form.addEventListener('submit', e => {
-                document.getElementById('loc').defaultValue = cookies.loc 
-                document.getElementById('dt').defaultValue = 'test'
+                const d = new Date()
+                document.getElementById('loc').defaultValue = cookies.loc
+                document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
                 document.cookie = "name=" + document.getElementById('user').value
                 console.log(document.cookie)
                 e.preventDefault()
                 fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => document.getElementById("demo").innerHTML = "<div class='alert alert-primary' role='alert'><b>Thank You for providing the details, We shall get back to you shortly !</b></div>", restaurants.reset())
+                    .then(response => restaurants.reset())
                     .catch(error => console.error('Error!', error.message))
                 cookies.status = 'old'
-                location.reload()
+            window.location.href = '/' + cookies.loc + '.html';
             })
-        } else {
+        } else if (cookies.status == 'old') {
             console.log(cookies.status)
             const forums = document.getElementById('form')
             const br = document.createElement('br')
@@ -114,6 +122,7 @@
             const text = document.createElement('h1')
             const background = document.getElementById('personal')
             const clear_btn = document.createElement('button')
+            document.getElementById('detail').innerHTML = 'Log In'
             forums.style.opacity = '0'
             text.innerHTML = 'Finish!!!'; p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว'; p.style.fontSize = '20px'
             text.style.position = 'absolute'; text.style.font = 'bold'; text.style.fontSize = '72px'
@@ -129,9 +138,9 @@
 
         function clearCookie() {
             document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure";
-            location.reload()
-            cookies.status = ''
-            cookies.loc = ''
+            window.location.href = '/' + cookies.loc + '.html';
+            document.cookie = "loc=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
+            document.cookie = "status=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
         }
 
         var break_key = 0;

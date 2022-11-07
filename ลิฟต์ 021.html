@@ -9,7 +9,7 @@
 </head>
 <body>
     <script>
-        const text = 'ลิฟต์ 022'
+        const text = 'ลิฟต์ 021'
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
         if (cookies.loc != text) { // ถ้า loc เดิม != loc ใหม่
             document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"

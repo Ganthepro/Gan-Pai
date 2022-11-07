@@ -1,5 +1,2 @@
-var test = "abcdefg"
-
-if ("abc" == test) {
-    console.log(test)
-}
+const d = new Date();
+console.log(d.getDay());
