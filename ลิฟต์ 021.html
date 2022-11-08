@@ -7,23 +7,32 @@
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         const text = 'ลิฟต์ 021'
-        let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-        if (cookies.loc != text) { // ถ้า loc เดิม != loc ใหม่
-            document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "loc=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "status=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "loc=" + text
-            document.cookie = "status=" + 'new'
-            let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
-            console.log(cookies.loc)
-            console.log(cookies.status)
-        } else {
-            document.cookie = "status=" + 'old'
-            console.log(cookies.status)
+        document.cookie = "loc=" + text
+        // localStorage.clear()
+        if (JSON.parse(localStorage.getItem('all')) == null && JSON.parse(localStorage.getItem('status')) == null) {
+            localStorage.setItem('all', '[]')
+            localStorage.setItem('status','')
         }
+        let all_loc = JSON.parse(localStorage.getItem('all'))
+        // console.log(localStorage.getItem('all'))
+        console.log(localStorage.getItem('status'))
+        let status_js = localStorage.getItem('status')
+        status_js = 'new'
+        for (var i = 0; i < all_loc.length; i++) {
+            if (all_loc[i] == 'ลิฟต์ 021') {
+                all_loc.splice(i, 1);
+                status_js = 'old'
+            }
+        }
+        all_loc.push(text)
+        localStorage.setItem('all', JSON.stringify(all_loc))
+        localStorage.setItem('status', status_js)
+        console.log(localStorage.getItem('all'))
+        console.log(localStorage.getItem('status'))
         window.location.href = '/main.html';
     </script>
 </body>

@@ -1,4 +1,4 @@
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 984px) {
     * {
         margin: 0;
         padding: 0;
@@ -231,7 +231,7 @@
         height: 600px;   
     }
     #personal {
-        height: 500px;   
+        height: 700px;   
     }
     #activity {
         height: 1500px;   
@@ -288,7 +288,7 @@
     position: absolute;left: 50%;top: 40%;transform: translate(-50%,-50%);
     }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 984px) {
     * {
         margin: 0;
         padding: 0;
@@ -747,10 +747,6 @@ td img {
 }
 
 .btn-primary {
-    position: absolute;
-    bottom: 25px;
-    z-index: 1;transform: translate(-50%,0);
-    left: 50%;
     width: 100px;height: 60px;
     font-family: 'Kanit', sans-serif;
     border-radius: 10px;border: 3pt solid #AC3520;
@@ -773,7 +769,55 @@ td img {
 ::placeholder {
     font-family: 'Kanit', sans-serif;
 }
-/* 
+
 #clearBtn {
-    
-} */
+    width: 100px;height: 60px;
+    font-family: 'Kanit', sans-serif;
+    border-radius: 10px;border: 3pt solid #AC3520;
+    background-color: rgb(255, 209, 63);
+    font-family: 'Prompt', sans-serif;font-size: 20px;
+    transition: font-size 1s;
+}
+
+#clearBtn:hover {
+    font-size: 25px;
+    cursor:pointer;
+}
+
+#buttonSubmit {
+    position: absolute;
+    width: 250px;height: 100px;
+    /* border: 2px solid red; */
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+#buttonSubmit button {
+    position: absolute;
+}
+
+#mt-3 {
+    top: 50%;
+    left: 0;
+    transform: translate(0,-50%);
+}
+
+#mt-2 {
+    top: 50%;
+    right: 0;
+    transform: translate(0,-50%);
+}
+
+#a-btn {
+    position: absolute;
+    font-size: 16px;
+    transition: font-size 1s;
+    left: 50%;top: 50%;width: 100%;
+    transform: translate(-50%,-50%);
+    text-decoration: none;color: black;
+}
+
+#a-btn:hover {
+    font-size: 18px;
+}

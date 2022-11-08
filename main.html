@@ -44,6 +44,8 @@
             <div class="col-lg-7 col-md-10">
                 <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants"
                     id="form">
+                    <input type="text" id="loc" name="Location" style="opacity: 0;position: absolute;width: 100%;left: 0;">
+                    <input type="text" id="dt" name="Date/Time" style="opacity: 0;position: absolute;width: 100%;left: 0;">
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="input_overlay">
@@ -55,15 +57,13 @@
                                     placeholder="ID" id="user">
                             </div>
                         </div>
-                        <div style="opacity: 0;">
-                            <input type="text" id="loc" name="Location">
-                            <input type="text" id="dt" name="Date/Time">
-                        </div>
-                        <div class="col-12 text-end">
-                            <button type="submit" class="btn btn-primary mt-3">
-                                <p>Submit</p>
+                        <div id="buttonSubmit">
+                            <button type="submit" class="btn-primary" id="mt-3"><p>Submit</p></button>
+                            <button class="btn-primary" id="mt-2">
+                                <a id="a-btn" href="https://docs.google.com/spreadsheets/d/1IUQKYDa5rHDI520jWxNBzVTOV1pWX4MDCXPNQr5dEPE/edit#gid=1356909475">View Data</a>
                             </button>
                         </div>
+                    </div>
                 </form>
             </div>
             <p id="demo"></p>
@@ -100,22 +100,10 @@
         console.log(all_loc)
         if (localStorage.getItem('status') == 'new') {
             form.addEventListener('submit', e => {
-                // console.log(all_loc)
-                // if (all_loc != undefined) {
-                //     for (let i = 0;i < all_loc.split(',').length;i++) {
-                //         locArr.push(all_loc)
-                //         console.log(all_loc)
-                //     }
-                // }
-                // locArr.push(text_loc)
-                // console.log(locArr)
-                // document.cookie = "All_loc=" + locArr.toString()
-                // cookies.status = 'old'
                 const d = new Date()
                 document.getElementById('loc').defaultValue = cookies.loc
                 document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
                 document.cookie = "name=" + document.getElementById('user').value
-                // console.log(document.cookie)
                 e.preventDefault()
                 fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                     .then(response => restaurants.reset())
@@ -131,21 +119,25 @@
             const text = document.createElement('h1')
             const background = document.getElementById('personal')
             const clear_btn = document.createElement('button')
+            const view_btn = document.createElement('button');const a_btn = document.createElement('a') 
             document.getElementById('detail').innerHTML = 'Log In'
             forums.style.opacity = '0'
             text.innerHTML = 'Finish!!!'; p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว'; p.style.fontSize = '20px'
             text.style.position = 'absolute'; text.style.font = 'bold'; text.style.fontSize = '72px'
-            text.style.top = '50%'; text.style.left = '50%'; hr.style.marginTop = '10px'
-            text.style.transform = 'translate(-50%,-50%)'
-            clear_btn.innerText = 'Clear'; clear_btn.setAttribute('onclick', 'clearCookie()'); clear_btn.setAttribute('id','clearBtn')
+            text.style.top = '40%'; text.style.left = '50%'; hr.style.marginTop = '10px'
+            text.style.transform = 'translate(-50%,-40%)';view_btn.setAttribute('class','btn-primary')
+            clear_btn.innerText = 'Clear'; clear_btn.setAttribute('onclick', 'clearStorage()'); clear_btn.setAttribute('id','clearBtn')
+            a_btn.innerHTML = 'View Data';a_btn.setAttribute('id','a-btn');view_btn.style.position = 'absolute';a_btn.setAttribute('href','https://docs.google.com/spreadsheets/d/1IUQKYDa5rHDI520jWxNBzVTOV1pWX4MDCXPNQr5dEPE/edit#gid=1356909475')
+            view_btn.style.bottom = '-80px';view_btn.style.left = '50%';view_btn.style.transform = 'translate(-50%,0)';view_btn.appendChild(a_btn);
+            text.appendChild(view_btn)
             text.appendChild(br)
             text.appendChild(p)
-            background.appendChild(text)
             text.appendChild(hr)
             text.appendChild(clear_btn)
+            background.appendChild(text)
         }
 
-        function clearCookie() {
+        function clearStorage() {
             let status_js = localStorage.getItem('status')
             status_js = 'new'
             let all_loc = JSON.parse(localStorage.getItem('all'))
