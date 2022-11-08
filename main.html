@@ -96,19 +96,21 @@
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
         const form = document.forms['restaurants']
         document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + cookies.loc + ')'
-        if ((cookies.name == '' || cookies.name == null) || (cookies.status == 'new')) {
+        let all_loc = JSON.parse(localStorage.getItem('all'))
+        console.log(all_loc)
+        if (localStorage.getItem('status') == 'new') {
             form.addEventListener('submit', e => {
-                console.log(all_loc)
-                if (all_loc != undefined) {
-                    for (let i = 0;i < all_loc.split(',').length;i++) {
-                        locArr.push(all_loc)
-                        console.log(all_loc)
-                    }
-                }
-                locArr.push(text_loc)
-                console.log(locArr)
-                document.cookie = "All_loc=" + locArr.toString()
-                cookies.status = 'old'
+                // console.log(all_loc)
+                // if (all_loc != undefined) {
+                //     for (let i = 0;i < all_loc.split(',').length;i++) {
+                //         locArr.push(all_loc)
+                //         console.log(all_loc)
+                //     }
+                // }
+                // locArr.push(text_loc)
+                // console.log(locArr)
+                // document.cookie = "All_loc=" + locArr.toString()
+                // cookies.status = 'old'
                 const d = new Date()
                 document.getElementById('loc').defaultValue = cookies.loc
                 document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
@@ -118,9 +120,9 @@
                 fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                     .then(response => restaurants.reset())
                     .catch(error => console.error('Error!', error.message))
-                // window.location.href = '/' + cookies.loc + '.html';
+                window.location.href = '/' + cookies.loc + '.html';
             })
-        } else if (cookies.status == 'old') {
+        } else if (localStorage.getItem('status') == 'old') {
             console.log(cookies.status)
             const forums = document.getElementById('form')
             const br = document.createElement('br')
@@ -144,9 +146,15 @@
         }
 
         function clearCookie() {
-            document.cookie = "name=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure";
-            document.cookie = "loc=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
-            document.cookie = "status=; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure"
+            let status_js = localStorage.getItem('status')
+            status_js = 'new'
+            let all_loc = JSON.parse(localStorage.getItem('all'))
+            for (var i = 0; i < all_loc.length; i++) {
+                if (all_loc[i] == cookies.loc) {
+                    all_loc.splice(i, 1);
+                }
+            }
+            localStorage.setItem('all', JSON.stringify(all_loc))
             window.location.href = '/' + cookies.loc + '.html';
         }
 

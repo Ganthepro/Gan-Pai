@@ -11,24 +11,29 @@
 <body>
     <script>
         const text = 'ฟิตเนส 011'
+        document.cookie = "loc=" + text
         // localStorage.clear()
-        if (JSON.parse(localStorage.getItem('all')) == null) {
+        if (JSON.parse(localStorage.getItem('all')) == null && JSON.parse(localStorage.getItem('status')) == null) {
             localStorage.setItem('all', '[]')
-        } else {
-            let all_loc = JSON.parse(localStorage.getItem('all'))
+            localStorage.setItem('status','')
         }
         let all_loc = JSON.parse(localStorage.getItem('all'))
         // console.log(localStorage.getItem('all'))
+        console.log(localStorage.getItem('status'))
+        let status_js = localStorage.getItem('status')
+        status_js = 'new'
         for (var i = 0; i < all_loc.length; i++) {
             if (all_loc[i] == 'ฟิตเนส 011') {
                 all_loc.splice(i, 1);
+                status_js = 'old'
             }
         }
         all_loc.push(text)
         localStorage.setItem('all', JSON.stringify(all_loc))
+        localStorage.setItem('status', status_js)
         console.log(localStorage.getItem('all'))
-        
-        // window.location.href = '/main.html';
+        console.log(localStorage.getItem('status'))
+        window.location.href = '/main.html';
     </script>
 </body>
 
