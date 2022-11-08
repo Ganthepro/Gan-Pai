@@ -44,8 +44,8 @@
             <div class="col-lg-7 col-md-10">
                 <form class="form_overlay" method="POST" accept-charset="UTF-8" autocomplete="off" name="restaurants"
                     id="form">
-                    <input type="text" id="loc" name="Location" style="opacity: 0;position: absolute;width: 100%;left: 0;">
-                    <input type="text" id="dt" name="Date/Time" style="opacity: 0;position: absolute;width: 100%;left: 0;">
+                    <input type="text" id="loc" name="Location" style="opacity: 0;position: absolute;width: 100%;left: 0;z-index: -10;">
+                    <input type="text" id="dt" name="Date/Time" style="opacity: 0;position: absolute;width: 100%;left: 0;z-index: -10;">
                     <div class="row g-4">
                         <div class="col-lg-6">
                             <div class="input_overlay">
@@ -156,7 +156,7 @@
         const github = document.getElementById('button-2');
         const a_link = document.getElementsByClassName('a-link');
         var width = window.innerWidth;
-        if (width < 768 && break_key === 0) {
+        if (width < 984 && break_key === 0) {
             home.remove();
             github.remove();
             const new_a_home = document.createElement('a');
@@ -183,7 +183,7 @@
             a_link.appendChild(new_a_github);
             break_key += 1
         }
-        else if (width > 768 && break_key1 === 0) {
+        else if (width > 984 && break_key1 === 0) {
             break_key1 += 1
             break_key += 1
         }
@@ -210,7 +210,7 @@
                 break_key += 1
                 break_key1 -= 1
             }
-            else if (width > 768 && break_key1 === 0) {
+            else if (width > 984 && break_key1 === 0) {
                 const a_home = document.getElementById('new_a_home');
                 const a_github = document.getElementById('new_a_github');
                 a_home.remove()

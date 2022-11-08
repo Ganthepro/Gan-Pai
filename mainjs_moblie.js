@@ -4,7 +4,7 @@ const home = document.getElementById('button-1');
 const github = document.getElementById('button-2');
 const a_link = document.getElementsByClassName('a-link');
 var width = window.innerWidth;
-if (width < 768 && break_key === 0) {
+if (width < 984 && break_key === 0) {
     home.remove();
     github.remove();
     const new_a_home = document.createElement('a');
@@ -31,7 +31,7 @@ if (width < 768 && break_key === 0) {
     a_link.appendChild(new_a_github);
     break_key += 1
 }
-else if (width > 768 && break_key1 === 0) {
+else if (width > 984 && break_key1 === 0) {
     break_key1 += 1
     break_key += 1
 }
@@ -65,7 +65,7 @@ window.addEventListener('resize', function() {
         break_key += 1
         break_key1 -= 1
     }
-    else if (width > 768 && break_key1 === 0) {
+    else if (width > 984 && break_key1 === 0) {
         const a_home = document.getElementById('new_a_home');
         const a_github = document.getElementById('new_a_github');
         a_home.remove()
