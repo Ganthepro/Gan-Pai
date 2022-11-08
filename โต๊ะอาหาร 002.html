@@ -10,7 +10,7 @@
 
 <body>
     <script>
-        const text = 'ร้านอาหาร 004'
+        const text = 'โต๊ะอาหาร 002'
         document.cookie = "loc=" + text
         // localStorage.clear()
         if (JSON.parse(localStorage.getItem('all')) == null && JSON.parse(localStorage.getItem('status')) == null) {
@@ -23,7 +23,7 @@
         let status_js = localStorage.getItem('status')
         status_js = 'new'
         for (var i = 0; i < all_loc.length; i++) {
-            if (all_loc[i] == 'ร้านอาหาร 004') {
+            if (all_loc[i] == 'โต๊ะอาหาร 002') {
                 all_loc.splice(i, 1);
                 status_js = 'old'
             }
