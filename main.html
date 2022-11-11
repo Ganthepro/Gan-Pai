@@ -92,26 +92,54 @@
         </div>
     </footer>
     <script>
+        function getPara(loc) {
+            let para = new URLSearchParams(window.location.search)
+            return para.get(loc)
+        }
+        // console.log(localStorage.getItem('name'))
+        // localStorage.clear()
+        if (localStorage.getItem('name') == null) {
+            console.log(localStorage.getItem('name'))
+            localStorage.setItem('all', '[]');localStorage.setItem('name','')
+        }
+        
+        // let all_loc = JSON.parse(localStorage.getItem('all'))
+        let local_name = localStorage.getItem('name')
+        console.log(local_name)
+        const loc = getPara('loc')
+        // all_loc.push(loc)
+        // localStorage.setItem('all', JSON.stringify(all_loc))
+        // localStorage.setItem('status', status_js)
+        
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
         let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
         const form = document.forms['restaurants']
-        document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + cookies.loc + ')'
-        let all_loc = JSON.parse(localStorage.getItem('all'))
-        console.log(all_loc)
-        if (localStorage.getItem('status') == 'new') {
+        document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + loc + ')'
+        // console.log(all_loc)
+        if (local_name == '') {
             form.addEventListener('submit', e => {
-                const d = new Date()
-                document.getElementById('loc').defaultValue = cookies.loc
-                document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
-                document.cookie = "name=" + document.getElementById('user').value
+                // const d = new Date()
+                // document.getElementById('loc').defaultValue = loc
+                // document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+                localStorage.setItem('name',document.getElementById('user').value)
                 e.preventDefault()
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => restaurants.reset())
-                    .catch(error => console.error('Error!', error.message))
-                window.location.href = '/' + cookies.loc + '.html';
+                // fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                //     .then(response => restaurants.reset())
+                //     .catch(error => console.error('Error!', error.message))
+                location.reload()
             })
-        } else if (localStorage.getItem('status') == 'old') {
-            console.log(cookies.status)
+        } else if (local_name != '') {
+            document.getElementById("mt-3").click();
+            const d = new Date()
+            document.getElementById('loc').defaultValue = loc
+            document.getElementById('user').defaultValue = local_name 
+            document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+            // localStorage.setItem('name',document.getElementById('user').value)
+            // console.log('click')
+            // e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => restaurants.reset())
+                .catch(error => console.error('Error!', error.message))
             const forums = document.getElementById('form')
             const br = document.createElement('br')
             const hr = document.createElement('hr')
@@ -136,18 +164,18 @@
             text.appendChild(clear_btn)
             background.appendChild(text)
         }
-
         function clearStorage() {
-            let status_js = localStorage.getItem('status')
-            status_js = 'new'
-            let all_loc = JSON.parse(localStorage.getItem('all'))
-            for (var i = 0; i < all_loc.length; i++) {
-                if (all_loc[i] == cookies.loc) {
-                    all_loc.splice(i, 1);
-                }
-            }
-            localStorage.setItem('all', JSON.stringify(all_loc))
-            window.location.href = '/' + cookies.loc + '.html';
+            // let status_js = localStorage.getItem('status')
+            // status_js = 'new'
+            // let all_loc = JSON.parse(localStorage.getItem('all'))
+            // for (var i = 0; i < all_loc.length; i++) {
+            //     if (all_loc[i] == cookies.loc) {
+            //         all_loc.splice(i, 1);
+            //     }
+            // }
+            // localStorage.setItem('all', JSON.stringify(all_loc))
+            localStorage.setItem('name','')
+            location.reload()
         }
 
         var break_key = 0;
