@@ -3,6 +3,18 @@ function getPara(loc) {
     return para.get(loc)
 }
 
+function infectedReported() {
+    const url = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
+    addEventListener('DOMContentLoaded',loaded)
+    function loaded() {
+        fetch(url)
+            .then((res)=>{return res.json})
+            .then((data)=>{
+                console.log(data)
+            })
+    }
+}
+
 if (localStorage.getItem('name') == null) {
     console.log(localStorage.getItem('name'))
     localStorage.setItem('all', '[]');localStorage.setItem('name','')
@@ -19,9 +31,20 @@ document.getElementById('detail').innerHTML = 'ลงทะเบียนคร
 // console.log(all_loc)
 if (local_name == '') {
     form.addEventListener('submit', e => {
-        localStorage.setItem('name',document.getElementById('user').value)
+        if (e.submitter.id == 'mt-1') {
+            const url = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
+            fetch(url,{mode: "no-cors"})
+                .then((res)=>{return res.json()})
+                .then((data)=>{
+                    console.log(data)
+                })
+            console.log(e.submitter.id)
+        }
+        else {
+            localStorage.setItem('name',document.getElementById('user').value)
+            location.reload()
+        }
         e.preventDefault()
-        location.reload()
     })
 } else if (local_name != '') {
     document.getElementById("mt-3").click();
@@ -29,6 +52,7 @@ if (local_name == '') {
     document.getElementById('loc').defaultValue = loc
     document.getElementById('user').defaultValue = local_name 
     document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    // เปลื่ยน method เป็น GET
     fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => restaurants.reset())
         .catch(error => console.error('Error!', error.message))
@@ -56,6 +80,7 @@ if (local_name == '') {
     text.appendChild(clear_btn)
     background.appendChild(text)
 }
+
 function clearStorage() {
     localStorage.setItem('name','')
     location.reload()
