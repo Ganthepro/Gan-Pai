@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const url = 'https://script.google.com/macros/s/AKfycbyleDUSKGjhJNJcWNtAafj7MfqfF3kYFbBDlq6RMsoZaaLVVx32bTuH1VOWrZBHTuLG/exec?action=30699'
+        fetch(url,{method : "POST",body : JSON.stringify({
+            "name" : "",
+            "nickName" : "",
+            // "phone" : "test",
+        }),
+        headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
+        // google.script.run
+        // .join
+        // google.script.url.getLocation(function(location) {
+        //   console.log(location.parameters);
+        //   console.log(location.hash);
+        // });
+    </script>
+        
+</body>
+</html>

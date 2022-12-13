@@ -19,9 +19,15 @@ if (localStorage.getItem('name') == null) {
     console.log(localStorage.getItem('name'))
     localStorage.setItem('all', '[]');localStorage.setItem('name','')
 }
+if (localStorage.getItem('infectStatus') == null) {
+    console.log(localStorage.getItem('infectStatus'))
+    localStorage.setItem('infectStatus','')
+}
 
 let local_name = localStorage.getItem('name')
+let infect_status = localStorage.getItem('infectStatus')
 console.log(local_name)
+console.log(infect_status)
 const loc = getPara('loc')
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
@@ -31,20 +37,20 @@ document.getElementById('detail').innerHTML = 'ลงทะเบียนคร
 // console.log(all_loc)
 if (local_name == '') {
     form.addEventListener('submit', e => {
+        e.preventDefault()
         if (e.submitter.id == 'mt-1') {
-            const url = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
-            fetch(url,{mode: "no-cors"})
-                .then((res)=>{return res.json()})
-                .then((data)=>{
-                    console.log(data)
-                })
-            console.log(e.submitter.id)
+            const url = 'https://script.google.com/macros/s/AKfycbyleDUSKGjhJNJcWNtAafj7MfqfF3kYFbBDlq6RMsoZaaLVVx32bTuH1VOWrZBHTuLG/exec?action=' + document.getElementById('user').value 
+            fetch(url,{method : "POST",body : JSON.stringify({
+                "name" : "",
+                "nickName" : "",
+                // "phone" : "test",
+            }),
+            headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
         }
         else {
             localStorage.setItem('name',document.getElementById('user').value)
             location.reload()
         }
-        e.preventDefault()
     })
 } else if (local_name != '') {
     document.getElementById("mt-3").click();
@@ -53,6 +59,7 @@ if (local_name == '') {
     document.getElementById('user').defaultValue = local_name 
     document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
     // เปลื่ยน method เป็น GET
+    console.log(new FormData(form))
     fetch(scriptURL, { method: 'POST', body: new FormData(form) })
         .then(response => restaurants.reset())
         .catch(error => console.error('Error!', error.message))
