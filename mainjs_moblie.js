@@ -39,13 +39,14 @@ if (local_name == '') {
     form.addEventListener('submit', e => {
         e.preventDefault()
         if (e.submitter.id == 'mt-1') {
-            const url = 'https://script.google.com/macros/s/AKfycbyleDUSKGjhJNJcWNtAafj7MfqfF3kYFbBDlq6RMsoZaaLVVx32bTuH1VOWrZBHTuLG/exec?action=' + document.getElementById('user').value 
+            localStorage.setItem('infectStatus','y')
+            const url = 'https://script.google.com/macros/s/AKfycbx0_XGNJP8BG59MTafoPr6DPrc_y5nBg-etVx8l5XXB80XYo-v--WgTI58oMHWo4jWX/exec?action=' + document.getElementById('user').value 
             fetch(url,{method : "POST",body : JSON.stringify({
                 "name" : "",
-                "nickName" : ""
+                "nickName" : "",
+                // "phone" : "test",
             }),
             headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
-            localStorage.setItem('infectStatus','y')
         }
         localStorage.setItem('name',document.getElementById('user').value)
         location.reload()
