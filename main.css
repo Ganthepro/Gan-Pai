@@ -756,7 +756,7 @@ td img {
 }    
 
 .btn-primary:hover {
-    font-size: 25px;
+    font-size: 22px;
     cursor:pointer;
 }
 
@@ -786,8 +786,8 @@ td img {
 
 #buttonSubmit {
     position: absolute;
-    width: 500px;height: 100px;
-    border: 2px solid red;
+    width: 350px;height: 100px;
+    /* border: 2px solid red; */
     bottom: 10px;
     left: 50%;
     transform: translate(-50%,0);

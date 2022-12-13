@@ -15,11 +15,9 @@ function infectedReported() {
     }
 }
 
-if (localStorage.getItem('name') == null) {
+if (localStorage.getItem('name') == null && localStorage.getItem('infectStatus') == null) {
     console.log(localStorage.getItem('name'))
     localStorage.setItem('all', '[]');localStorage.setItem('name','')
-}
-if (localStorage.getItem('infectStatus') == null) {
     console.log(localStorage.getItem('infectStatus'))
     localStorage.setItem('infectStatus','')
 }
@@ -29,25 +27,26 @@ let infect_status = localStorage.getItem('infectStatus')
 console.log(local_name)
 console.log(infect_status)
 const loc = getPara('loc')
-
 const scriptURL = 'https://script.google.com/macros/s/AKfycbx5BSfMMYu-ng_n-V14coSZ8GVOVr2dHTH7I0QVnWYKyXpmT0gXX8EyQaXyN1S1mLyq/exec'
 let cookies = document.cookie.split(';').map(cookie => cookie.split('=')).reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
 const form = document.forms['restaurants']
 document.getElementById('detail').innerHTML = 'ลงทะเบียนครั้งแรก ' + '(' + loc + ')'
 // console.log(all_loc)
+function infectedReported(but) {
+    localStorage.setItem('infectStatus','y')
+    const url = 'https://script.google.com/macros/s/AKfycbx0_XGNJP8BG59MTafoPr6DPrc_y5nBg-etVx8l5XXB80XYo-v--WgTI58oMHWo4jWX/exec?action=' + document.getElementById('user').value 
+    fetch(url,{method : "POST",body : JSON.stringify({
+        "name" : "",
+        "nickName" : ""
+    }),
+    headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
+    if (but != null) {location.reload()}
+}
+
 if (local_name == '') {
     form.addEventListener('submit', e => {
         e.preventDefault()
-        if (e.submitter.id == 'mt-1') {
-            localStorage.setItem('infectStatus','y')
-            const url = 'https://script.google.com/macros/s/AKfycbx0_XGNJP8BG59MTafoPr6DPrc_y5nBg-etVx8l5XXB80XYo-v--WgTI58oMHWo4jWX/exec?action=' + document.getElementById('user').value 
-            fetch(url,{method : "POST",body : JSON.stringify({
-                "name" : "",
-                "nickName" : "",
-                // "phone" : "test",
-            }),
-            headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
-        }
+        if (e.submitter.id == 'mt-1') {infectedReported()}
         localStorage.setItem('name',document.getElementById('user').value)
         location.reload()
     })
@@ -70,7 +69,7 @@ if (local_name == '') {
     const p = document.createElement('p')
     const text = document.createElement('h1')
     const background = document.getElementById('personal')
-    const clear_btn = document.createElement('button')
+    const clear_btn = document.createElement('button');const infect_btn = document.createElement('button')
     const view_btn = document.createElement('button');const a_btn = document.createElement('a') 
     document.getElementById('detail').innerHTML = 'Log In'
     forums.style.opacity = '0'
@@ -83,6 +82,11 @@ if (local_name == '') {
     clear_btn.innerText = 'Clear'; clear_btn.setAttribute('onclick', 'clearStorage()'); clear_btn.setAttribute('id','clearBtn')
     a_btn.innerHTML = 'View Data';a_btn.setAttribute('id','a-btn');view_btn.style.position = 'absolute';a_btn.setAttribute('href','https://docs.google.com/spreadsheets/d/1IUQKYDa5rHDI520jWxNBzVTOV1pWX4MDCXPNQr5dEPE/edit#gid=1356909475')
     view_btn.style.bottom = '-80px';view_btn.style.left = '50%';view_btn.style.transform = 'translate(-50%,0)';view_btn.appendChild(a_btn);
+    if (infect_status == "") {
+        infect_btn.innerHTML = 'Infected';infect_btn.setAttribute('class','btn-primary');infect_btn.style.position = 'absolute';infect_btn.style.bottom = '-165px';
+        infect_btn.style.left = '50%';infect_btn.style.transform = 'translate(-50%,0)';infect_btn.setAttribute('onclick','infectedReported(this)')
+    }
+    text.appendChild(infect_btn)
     text.appendChild(view_btn)
     text.appendChild(br)
     text.appendChild(p)
@@ -96,6 +100,8 @@ function clearStorage() {
     localStorage.setItem('infectStatus','')
     location.reload()
 }
+
+// ######################################################### //
 
 var break_key = 0;
 var break_key1 = 0;
