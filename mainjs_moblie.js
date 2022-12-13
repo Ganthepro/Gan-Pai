@@ -42,15 +42,13 @@ if (local_name == '') {
             const url = 'https://script.google.com/macros/s/AKfycbyleDUSKGjhJNJcWNtAafj7MfqfF3kYFbBDlq6RMsoZaaLVVx32bTuH1VOWrZBHTuLG/exec?action=' + document.getElementById('user').value 
             fetch(url,{method : "POST",body : JSON.stringify({
                 "name" : "",
-                "nickName" : "",
-                // "phone" : "test",
+                "nickName" : ""
             }),
             headers : {"Content-Type" : 'application/json'},mode : "no-cors"})
+            localStorage.setItem('infectStatus','y')
         }
-        else {
-            localStorage.setItem('name',document.getElementById('user').value)
-            location.reload()
-        }
+        localStorage.setItem('name',document.getElementById('user').value)
+        location.reload()
     })
 } else if (local_name != '') {
     document.getElementById("mt-3").click();
@@ -60,9 +58,11 @@ if (local_name == '') {
     document.getElementById('dt').defaultValue = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
     // เปลื่ยน method เป็น GET
     console.log(new FormData(form))
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => restaurants.reset())
-        .catch(error => console.error('Error!', error.message))
+    if (infect_status == "" || infect_status == 'n') {
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => restaurants.reset())
+            .catch(error => console.error('Error!', error.message))
+    }
     const forums = document.getElementById('form')
     const br = document.createElement('br')
     const hr = document.createElement('hr')
@@ -73,7 +73,9 @@ if (local_name == '') {
     const view_btn = document.createElement('button');const a_btn = document.createElement('a') 
     document.getElementById('detail').innerHTML = 'Log In'
     forums.style.opacity = '0'
-    text.innerHTML = 'Finish!!!'; p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว'; p.style.fontSize = '20px'
+    if (infect_status != "") {text.innerHTML = 'Stay Safe!!!'; p.innerHTML = 'รักษาสุขภาพ';}
+    else {text.innerHTML = 'Finish!!!'; p.innerHTML = 'คุณถูกบันทึกเข้าระบบแล้ว';} 
+    p.style.fontSize = '20px'
     text.style.position = 'absolute'; text.style.font = 'bold'; text.style.fontSize = '72px'
     text.style.top = '40%'; text.style.left = '50%'; hr.style.marginTop = '10px'
     text.style.transform = 'translate(-50%,-40%)';view_btn.setAttribute('class','btn-primary')
@@ -90,6 +92,7 @@ if (local_name == '') {
 
 function clearStorage() {
     localStorage.setItem('name','')
+    localStorage.setItem('infectStatus','')
     location.reload()
 }
 
