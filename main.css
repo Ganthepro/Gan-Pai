@@ -751,12 +751,12 @@ td img {
     font-family: 'Kanit', sans-serif;
     border-radius: 10px;border: 3pt solid #AC3520;
     background-color: rgb(255, 209, 63);
-    font-family: 'Prompt', sans-serif;font-size: 20px;
+    font-family: 'Prompt', sans-serif;font-size: 15px;
     transition: font-size 1s;
 }    
 
 .btn-primary:hover {
-    font-size: 22px;
+    font-size: 17.5px;
     cursor:pointer;
 }
 
@@ -816,11 +816,11 @@ td img {
     font-family: 'Kanit', sans-serif;
     border-radius: 10px;border: 3pt solid #AC3520;
     background-color: rgb(255, 209, 63);
-    font-family: 'Prompt', sans-serif;font-size: 19px;
+    font-family: 'Prompt', sans-serif;font-size: 15px;
     transition: font-size 1s;
 }
 #mt-1:hover {
-    font-size: 21px;cursor:pointer;
+    font-size: 17.5px;cursor:pointer;
 }
 
 #a-btn {

@@ -34,7 +34,7 @@ document.getElementById('detail').innerHTML = 'ลงทะเบียนคร
 // console.log(all_loc)
 function infectedReported(but) {
     localStorage.setItem('infectStatus','y')
-    const url = 'https://script.google.com/macros/s/AKfycbx0_XGNJP8BG59MTafoPr6DPrc_y5nBg-etVx8l5XXB80XYo-v--WgTI58oMHWo4jWX/exec?action=' + document.getElementById('user').value 
+    const url = 'https://script.google.com/macros/s/AKfycbzXMkvjBdFN9EPPs9xm2nATryMjq03GLocil3spwHQpt5bdoY0WPh9SdWENfq1bC7tY/exec?action=' + document.getElementById('user').value 
     fetch(url,{method : "POST",body : JSON.stringify({
         "name" : "",
         "nickName" : ""
